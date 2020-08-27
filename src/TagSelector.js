@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity, Text, StyleSheet, ViewPropTypes } from 'react-native';
+import { View, TouchableOpacity, Text, StyleSheet, ViewPropTypes} from 'react-native';
 import PropTypes from 'prop-types';
+
+import { color } from 'react-native-reanimated';
 
 export class TagSelector extends Component {
     /**
@@ -70,16 +72,16 @@ export class TagSelector extends Component {
                     : [containerStyle, maxHeight > 0 ? { maxHeight: this.props.maxHeight } : {}]}>
                     {this.props.tags.map((i) => this.renderTag(i))}
                 </View>
-                {this.state.overflowed ?
-                    <View style={separatorStyle}>
+                {/* {this.state.overflowed ?
+                   // <View style={separatorStyle}>
                         <TouchableOpacity
                             style={expandBtnStyle}
                             onPress={this.onExpand}>
                             <Text style={expandTextStyle}>{this.state.expanded ? expandCaptions[1] : expandCaptions[0]}</Text>
                         </TouchableOpacity>
-                    </View>
+                    //</View>
                     : null
-                }
+                } */}
             </View>
         );
     }
@@ -92,9 +94,11 @@ TagSelector.propTypes = {
     expandCaptions: PropTypes.array,
     expdandedContainerStyle: ViewPropTypes.style,
     containerStyle: ViewPropTypes.style,
-    selectedTagStyle: Text.propTypes.style,
-    tagStyle: Text.propTypes.style,
+    selectedTagStyle: ViewPropTypes.style,
+    tagStyle: ViewPropTypes.style,
+    //tagStyle:Text.propTypes.style,
     separatorStyle: ViewPropTypes.style,
+    //separatorStyle: Text.propTypes.style,
     expandBtnStyle: ViewPropTypes.style,
     expandTextStyle: Text.propTypes.style
 }
@@ -103,54 +107,79 @@ const styles = StyleSheet.create({
     btnText: {
         fontSize: 12,
         textAlign: 'right',
-        padding: 0
+        padding: 0,
+        color: '#fff'
     },
     btnStyle: {
         height: 25,
         justifyContent: 'flex-start',
         alignSelf: 'flex-end'
+
     },
     showMore: {
         marginTop: 10,
         borderTopWidth: 1,
-        borderTopColor: 'grey',
+        borderTopColor: '#fff',
     },
     container: {
         flexDirection: 'row',
         flexWrap: 'wrap',
-        overflow: 'hidden'
+        //overflow: 'hidden',
+        //borderRadius:35
     },
     containerExpanded: {
         flexDirection: 'row',
         flexWrap: 'wrap',
     },
     tag: {
-        alignSelf: 'center',
-        fontSize: 12,
+        alignSelf: 'flex-start',
         paddingBottom: 8,
         paddingTop: 8,
         paddingLeft: 16,
         paddingRight: 16,
-        height: 32,
-        margin: 2,
-        backgroundColor: '#EBF1FD'
+        margin: 8,
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        //overflow: 'hidden',
+        borderRadius: 20,
+        height: 35,
+        backgroundColor: '#EBF1FD',
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.5,
+        shadowRadius: 20
+
+
+
     },
     tagSelected: {
-        alignSelf: 'center',
-        fontSize: 12,
-        paddingBottom: 8,
+        alignSelf: 'flex-start',
+        paddingBottom: 12,
         paddingTop: 8,
         paddingLeft: 16,
         paddingRight: 16,
-        height: 32,
-        margin: 2,
+        margin: 8,
         color: 'white',
-        backgroundColor: '#6242f4'
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        //overflow: 'hidden',
+        height: 35,
+        borderRadius: 20,
+        backgroundColor: '#f09874',
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 20 },
+        shadowOpacity: 0.5,
+        shadowRadius: 80
+    
+
+
+
+
     }
 })
 
 TagSelector.defaultProps = {
-    expandCaptions: ['more', 'less'],
+    // expandCaptions: ['', 'less'],
     expdandedContainerStyle: styles.containerExpanded,
     containerStyle: styles.container,
     selectedTagStyle: styles.tagSelected,
