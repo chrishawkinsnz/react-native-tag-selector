@@ -6,7 +6,7 @@ import { color } from 'react-native-reanimated';
 
 export class TagSelector extends Component {
     /**
-     * Tag selector
+     * Tag selector :)
      *
      * @param {Function} onChange callback on change with one (tagsSelected) param - array of selected tags' id
      * @param {Number} maxHeight max height of view to allow before appears 'Show more' text and folding functionality
